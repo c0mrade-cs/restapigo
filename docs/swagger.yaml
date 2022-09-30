@@ -1,0 +1,207 @@
+definitions:
+  main.Article:
+    properties:
+      author:
+        $ref: '#/definitions/main.Person'
+      body:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  main.Articlecreate:
+    properties:
+      author:
+        $ref: '#/definitions/main.Person'
+      body:
+        type: string
+      title:
+        type: string
+    type: object
+  main.Articleupdate:
+    properties:
+      author:
+        $ref: '#/definitions/main.Person'
+      body:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  main.JSONErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  main.JSONResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+  main.Person:
+    properties:
+      firstname:
+        type: string
+      lastname:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /article:
+    get:
+      consumes:
+      - application/json
+      description: get article
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Article'
+                  type: array
+              type: object
+      summary: List article
+      tags:
+      - article
+    post:
+      consumes:
+      - application/json
+      description: create article
+      parameters:
+      - description: article body
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/main.Articlecreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Article'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.JSONErrorResponse'
+      summary: Create article
+      tags:
+      - article
+    put:
+      consumes:
+      - application/json
+      description: update article
+      parameters:
+      - description: article body
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/main.Articleupdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/main.Article'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.JSONErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.JSONErrorResponse'
+      summary: Update article
+      tags:
+      - article
+  /article/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete article by id
+      parameters:
+      - description: article id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/main.Article'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.JSONErrorResponse'
+      summary: Delete article by id
+      tags:
+      - article
+    get:
+      consumes:
+      - application/json
+      description: get article by id
+      parameters:
+      - description: article id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/main.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/main.Article'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.JSONErrorResponse'
+      summary: get article by id
+      tags:
+      - article
+swagger: "2.0"
