@@ -15,12 +15,12 @@ import (
 // @Tags         author
 // @Accept       json
 // @Produce      json
-// @Param        author    body     models.Authorcreate  true  "author body"
+// @Param        author    body     models.AuthorCreate  true  "author body"
 // @Success      201  {object}   models.JSONResponse{data=models.Author}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Router       /author [post]
 func CreateAuthor(c *gin.Context) {
-	var data models.Authorcreate
+	var data models.AuthorCreate
 	if err := c.ShouldBindJSON(&data); err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
 		return
@@ -34,7 +34,8 @@ func CreateAuthor(c *gin.Context) {
 		})
 		return
 	}
-	author, err := storage.ReadbyIdAuthor(id.String())
+
+	author, err := storage.ReadbyIDAuthor(id.String())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: err.Error(),
@@ -69,7 +70,7 @@ func ReadAuthor(c *gin.Context) {
 	})
 }
 
-// ReadbyIdAuthor godoc
+// ReadbyIDAuthor godoc
 // @Summary      get author by id
 // @Description  get author by id
 // @Tags         author
@@ -79,19 +80,20 @@ func ReadAuthor(c *gin.Context) {
 // @Success      200  {object}   models.JSONResponse{data=models.Author}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Router       /author/{id} [get]
-func ReadbyIdAuthor(c *gin.Context) {
+func ReadbyIDAuthor(c *gin.Context) {
 	idStr := c.Param("id")
-	author, err := storage.ReadbyIdAuthor(idStr)
+
+	author, err := storage.ReadbyIDAuthor(idStr)
 	if err != nil {
 		c.JSON(http.StatusNotFound, models.JSONErrorResponse{
 			Error: err.Error(),
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, models.JSONResponse{
 		Data: author,
 	})
-
 }
 
 // UpdateAuthor godoc
@@ -100,13 +102,13 @@ func ReadbyIdAuthor(c *gin.Context) {
 // @Tags         author
 // @Accept       json
 // @Produce      json
-// @Param        author    body     models.Authorupdate  true  "author body"
+// @Param        author    body     models.AuthorUpdate  true  "author body"
 // @Success      200  {object}   models.JSONResponse{data=models.Author}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Failure      404  {object}  models.JSONErrorResponse
 // @Router       /author [put]
 func UpdateAuthor(c *gin.Context) {
-	var data models.Authorupdate
+	var data models.AuthorUpdate
 	if err := c.ShouldBindJSON(&data); err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
 		return
@@ -119,10 +121,10 @@ func UpdateAuthor(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, models.JSONResponse{
 		Data: storage.InMemoryAuthorData,
 	})
-
 }
 
 // DeleteAuthor godoc
@@ -137,6 +139,7 @@ func UpdateAuthor(c *gin.Context) {
 // @Router       /author/{id} [delete]
 func DeleteAuthor(c *gin.Context) {
 	id := c.Param("id")
+
 	author, err := storage.DeleteAuthori(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, models.JSONErrorResponse{
@@ -144,6 +147,7 @@ func DeleteAuthor(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, models.JSONResponse{
 		Data: author,
 	})

@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+// Author ...
 type Author struct {
 	ID        string
 	Firstname string
@@ -9,16 +10,21 @@ type Author struct {
 	CreatedAt *time.Time
 	UpdatedAt *time.Time
 }
-type Authorcreate struct {
+
+// AuthorCreate ...
+type AuthorCreate struct {
 	Firstname string
 	Lastname  string
 }
-type Authorupdate struct {
+
+// AuthorUpdate ...
+type AuthorUpdate struct {
 	ID        string
 	Firstname string
 	Lastname  string
 }
 
+// PackedArticleModel ...
 type PackedArticleModel struct {
 	ID string
 	Content

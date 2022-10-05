@@ -16,12 +16,12 @@ import (
 // @Tags         article
 // @Accept       json
 // @Produce      json
-// @Param        article    body     models.Articlecreate  true  "article body"
+// @Param        article    body     models.ArticleCreate  true  "article body"
 // @Success      201  {object}   models.JSONResponse{data=models.Article}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Router       /article [post]
 func CreateArticle(c *gin.Context) {
-	var data models.Articlecreate
+	var data models.ArticleCreate
 	if err := c.ShouldBindJSON(&data); err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
 		return
@@ -35,7 +35,8 @@ func CreateArticle(c *gin.Context) {
 		})
 		return
 	}
-	article, err := storage.ReadbyIdArticle(id.String())
+
+	article, err := storage.ReadbyIDArticle(id.String())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: err.Error(),
@@ -70,7 +71,7 @@ func ReadArticle(c *gin.Context) {
 	})
 }
 
-// ReadbyIdArticle godoc
+// ReadbyIDArticle godoc
 // @Summary      get article by id
 // @Description  get article by id
 // @Tags         article
@@ -80,15 +81,16 @@ func ReadArticle(c *gin.Context) {
 // @Success      200  {object}   models.JSONResponse{data=models.PackedArticleModel}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Router       /article/{id} [get]
-func ReadbyIdArticle(c *gin.Context) {
+func ReadbyIDArticle(c *gin.Context) {
 	idStr := c.Param("id")
-	article, err := storage.ReadbyIdArticle(idStr)
+	article, err := storage.ReadbyIDArticle(idStr)
 	if err != nil {
 		c.JSON(http.StatusNotFound, models.JSONErrorResponse{
 			Error: err.Error(),
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, models.JSONResponse{
 		Data: article,
 	})
@@ -101,13 +103,13 @@ func ReadbyIdArticle(c *gin.Context) {
 // @Tags         article
 // @Accept       json
 // @Produce      json
-// @Param        article    body     models.Articleupdate  true  "article body"
+// @Param        article    body     models.ArticleUpdate  true  "article body"
 // @Success      200  {object}   models.JSONResponse{data=models.Article}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Failure      404  {object}  models.JSONErrorResponse
 // @Router       /article [put]
 func UpdateArticle(c *gin.Context) {
-	var data models.Articleupdate
+	var data models.ArticleUpdate
 	if err := c.ShouldBindJSON(&data); err != nil {
 		c.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
 		return
@@ -120,6 +122,7 @@ func UpdateArticle(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, models.JSONResponse{
 		Data: storage.InMemoryArticleData,
 	})
@@ -145,6 +148,7 @@ func DeleteArticle(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, models.JSONResponse{
 		Data: article,
 	})

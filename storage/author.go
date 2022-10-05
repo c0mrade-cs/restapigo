@@ -7,9 +7,11 @@ import (
 	"github.com/c0mrade-cs/article/models"
 )
 
+// InMemoryAuthorData ...
 var InMemoryAuthorData []models.Author
 
-func CreateAuthor(id string, entity models.Authorcreate) error {
+// CreateAuthor ...
+func CreateAuthor(id string, entity models.AuthorCreate) error {
 	var author models.Author
 	author.ID = id
 	author.Firstname = entity.Firstname
@@ -21,7 +23,8 @@ func CreateAuthor(id string, entity models.Authorcreate) error {
 	return nil
 }
 
-func ReadbyIdAuthor(id string) (models.Author, error) {
+// ReadbyIDAuthor ...
+func ReadbyIDAuthor(id string) (models.Author, error) {
 	for _, v := range InMemoryAuthorData {
 		if v.ID == id {
 			return v, nil
@@ -30,12 +33,14 @@ func ReadbyIdAuthor(id string) (models.Author, error) {
 	return models.Author{}, errors.New("author not found")
 }
 
+// ReadAuthor ...
 func ReadAuthor() (resp []models.Author, err error) {
 	resp = InMemoryAuthorData
 	return resp, err
 }
 
-func UpdateAuthor(entity models.Authorupdate) error {
+// UpdateAuthor ...
+func UpdateAuthor(entity models.AuthorUpdate) error {
 	var author models.Author
 	for i, v := range InMemoryAuthorData {
 		if v.ID == entity.ID {
@@ -46,13 +51,13 @@ func UpdateAuthor(entity models.Authorupdate) error {
 			author.Firstname = entity.Firstname
 			author.Lastname = entity.Lastname
 			InMemoryAuthorData[i] = author
-
 		}
 	}
 
 	return nil
 }
 
+// DeleteAuthori ...
 func DeleteAuthori(id string) (models.Author, error) {
 	for i, v := range InMemoryAuthorData {
 		if v.ID == id {

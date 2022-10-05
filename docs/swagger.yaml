@@ -14,7 +14,7 @@ definitions:
       updatedAt:
         type: string
     type: object
-  models.Articlecreate:
+  models.ArticleCreate:
     properties:
       authorID:
         type: string
@@ -23,7 +23,7 @@ definitions:
       title:
         type: string
     type: object
-  models.Articleupdate:
+  models.ArticleUpdate:
     properties:
       authorID:
         type: string
@@ -47,14 +47,14 @@ definitions:
       updatedAt:
         type: string
     type: object
-  models.Authorcreate:
+  models.AuthorCreate:
     properties:
       firstname:
         type: string
       lastname:
         type: string
     type: object
-  models.Authorupdate:
+  models.AuthorUpdate:
     properties:
       firstname:
         type: string
@@ -124,7 +124,7 @@ paths:
         name: article
         required: true
         schema:
-          $ref: '#/definitions/models.Articlecreate'
+          $ref: '#/definitions/models.ArticleCreate'
       produces:
       - application/json
       responses:
@@ -154,7 +154,7 @@ paths:
         name: article
         required: true
         schema:
-          $ref: '#/definitions/models.Articleupdate'
+          $ref: '#/definitions/models.ArticleUpdate'
       produces:
       - application/json
       responses:
@@ -269,7 +269,7 @@ paths:
         name: author
         required: true
         schema:
-          $ref: '#/definitions/models.Authorcreate'
+          $ref: '#/definitions/models.AuthorCreate'
       produces:
       - application/json
       responses:
@@ -299,7 +299,7 @@ paths:
         name: author
         required: true
         schema:
-          $ref: '#/definitions/models.Authorupdate'
+          $ref: '#/definitions/models.AuthorUpdate'
       produces:
       - application/json
       responses:

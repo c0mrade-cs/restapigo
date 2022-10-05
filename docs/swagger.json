@@ -60,7 +60,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Articleupdate"
+                            "$ref": "#/definitions/models.ArticleUpdate"
                         }
                     }
                 ],
@@ -116,7 +116,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Articlecreate"
+                            "$ref": "#/definitions/models.ArticleCreate"
                         }
                     }
                 ],
@@ -302,7 +302,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Authorupdate"
+                            "$ref": "#/definitions/models.AuthorUpdate"
                         }
                     }
                 ],
@@ -358,7 +358,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Authorcreate"
+                            "$ref": "#/definitions/models.AuthorCreate"
                         }
                     }
                 ],
@@ -513,7 +513,7 @@
                 }
             }
         },
-        "models.Articlecreate": {
+        "models.ArticleCreate": {
             "type": "object",
             "properties": {
                 "authorID": {
@@ -527,7 +527,7 @@
                 }
             }
         },
-        "models.Articleupdate": {
+        "models.ArticleUpdate": {
             "type": "object",
             "properties": {
                 "authorID": {
@@ -564,7 +564,7 @@
                 }
             }
         },
-        "models.Authorcreate": {
+        "models.AuthorCreate": {
             "type": "object",
             "properties": {
                 "firstname": {
@@ -575,7 +575,7 @@
                 }
             }
         },
-        "models.Authorupdate": {
+        "models.AuthorUpdate": {
             "type": "object",
             "properties": {
                 "firstname": {

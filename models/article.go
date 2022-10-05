@@ -2,11 +2,13 @@ package models
 
 import "time"
 
+// Content ...
 type Content struct {
 	Title string
 	Body  string
 }
 
+// Article ...
 type Article struct {
 	ID string
 	Content
@@ -14,11 +16,15 @@ type Article struct {
 	CreatedAt *time.Time
 	UpdatedAt *time.Time
 }
-type Articlecreate struct {
+
+// ArticleCreate ...
+type ArticleCreate struct {
 	Content
 	AuthorID string
 }
-type Articleupdate struct {
+
+// ArticleUpdate ...
+type ArticleUpdate struct {
 	ID string
 	Content
 	AuthorID string

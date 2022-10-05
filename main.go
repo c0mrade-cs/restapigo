@@ -24,13 +24,13 @@ func main() {
 
 	r.POST("/article", handlers.CreateArticle)
 	r.GET("/article", handlers.ReadArticle)
-	r.GET("/article/:id", handlers.ReadbyIdArticle)
+	r.GET("/article/:id", handlers.ReadbyIDArticle)
 	r.PUT("/article", handlers.UpdateArticle)
 	r.DELETE("/article/:id", handlers.DeleteArticle)
 
 	r.POST("/author", handlers.CreateAuthor)
 	r.GET("/author", handlers.ReadAuthor)
-	r.GET("/author/:id", handlers.ReadbyIdAuthor)
+	r.GET("/author/:id", handlers.ReadbyIDAuthor)
 	r.PUT("/author", handlers.UpdateAuthor)
 	r.DELETE("/author/:id", handlers.DeleteAuthor)
 

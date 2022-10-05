@@ -7,9 +7,11 @@ import (
 	"github.com/c0mrade-cs/article/models"
 )
 
+// InMemoryArticleData ...
 var InMemoryArticleData []models.Article
 
-func CreateArticle(id string, entity models.Articlecreate) error {
+// CreateArticle ...
+func CreateArticle(id string, entity models.ArticleCreate) error {
 	var article models.Article
 	article.ID = id
 	article.Content = entity.Content
@@ -21,11 +23,12 @@ func CreateArticle(id string, entity models.Articlecreate) error {
 	return nil
 }
 
-func ReadbyIdArticle(id string) (models.PackedArticleModel, error) {
+// ReadbyIDArticle ...
+func ReadbyIDArticle(id string) (models.PackedArticleModel, error) {
 	var result models.PackedArticleModel
 	for _, v := range InMemoryArticleData {
 		if v.ID == id {
-			author, err := ReadbyIdAuthor(v.AuthorID)
+			author, err := ReadbyIDAuthor(v.AuthorID)
 			if err != nil {
 				return result, err
 			}
@@ -41,12 +44,14 @@ func ReadbyIdArticle(id string) (models.PackedArticleModel, error) {
 	return models.PackedArticleModel{}, errors.New("article not found")
 }
 
+// ReadArticle ...
 func ReadArticle() (resp []models.Article, err error) {
 	resp = InMemoryArticleData
 	return resp, err
 }
 
-func UpdateArticle(entity models.Articleupdate) error {
+// UpdateArticle ...
+func UpdateArticle(entity models.ArticleUpdate) error {
 	var article models.Article
 	for i, v := range InMemoryArticleData {
 		if v.ID == entity.ID {
@@ -64,6 +69,7 @@ func UpdateArticle(entity models.Articleupdate) error {
 	return nil
 }
 
+// DeleteArticlei ...
 func DeleteArticlei(id string) (models.Article, error) {
 	for i, v := range InMemoryArticleData {
 		if v.ID == id {

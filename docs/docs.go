@@ -72,7 +72,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Articleupdate"
+                            "$ref": "#/definitions/models.ArticleUpdate"
                         }
                     }
                 ],
@@ -128,7 +128,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Articlecreate"
+                            "$ref": "#/definitions/models.ArticleCreate"
                         }
                     }
                 ],
@@ -314,7 +314,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Authorupdate"
+                            "$ref": "#/definitions/models.AuthorUpdate"
                         }
                     }
                 ],
@@ -370,7 +370,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Authorcreate"
+                            "$ref": "#/definitions/models.AuthorCreate"
                         }
                     }
                 ],
@@ -525,7 +525,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Articlecreate": {
+        "models.ArticleCreate": {
             "type": "object",
             "properties": {
                 "authorID": {
@@ -539,7 +539,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Articleupdate": {
+        "models.ArticleUpdate": {
             "type": "object",
             "properties": {
                 "authorID": {
@@ -576,7 +576,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Authorcreate": {
+        "models.AuthorCreate": {
             "type": "object",
             "properties": {
                 "firstname": {
@@ -587,7 +587,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Authorupdate": {
+        "models.AuthorUpdate": {
             "type": "object",
             "properties": {
                 "firstname": {
