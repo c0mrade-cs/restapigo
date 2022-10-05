@@ -194,7 +194,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Article"
+                                            "$ref": "#/definitions/models.PackedArticleModel"
                                         }
                                     }
                                 }
@@ -257,14 +257,256 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/author": {
+            "get": {
+                "description": "get author",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "author"
+                ],
+                "summary": "List author",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/models.Author"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update author",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "author"
+                ],
+                "summary": "Update author",
+                "parameters": [
+                    {
+                        "description": "author body",
+                        "name": "author",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Authorupdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Author"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create author",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "author"
+                ],
+                "summary": "Create author",
+                "parameters": [
+                    {
+                        "description": "author body",
+                        "name": "author",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Authorcreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Author"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/author/{id}": {
+            "get": {
+                "description": "get author by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "author"
+                ],
+                "summary": "get author by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "author id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Author"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete author by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "author"
+                ],
+                "summary": "Delete author by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "author id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Author"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "models.Article": {
             "type": "object",
             "properties": {
-                "author": {
-                    "$ref": "#/definitions/models.Person"
+                "authorID": {
+                    "type": "string"
                 },
                 "body": {
                     "type": "string"
@@ -286,8 +528,8 @@ const docTemplate = `{
         "models.Articlecreate": {
             "type": "object",
             "properties": {
-                "author": {
-                    "$ref": "#/definitions/models.Person"
+                "authorID": {
+                    "type": "string"
                 },
                 "body": {
                     "type": "string"
@@ -300,8 +542,8 @@ const docTemplate = `{
         "models.Articleupdate": {
             "type": "object",
             "properties": {
-                "author": {
-                    "$ref": "#/definitions/models.Person"
+                "authorID": {
+                    "type": "string"
                 },
                 "body": {
                     "type": "string"
@@ -310,6 +552,51 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Author": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Authorcreate": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Authorupdate": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lastname": {
                     "type": "string"
                 }
             }
@@ -331,13 +618,25 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Person": {
+        "models.PackedArticleModel": {
             "type": "object",
             "properties": {
-                "firstname": {
+                "author": {
+                    "$ref": "#/definitions/models.Author"
+                },
+                "body": {
                     "type": "string"
                 },
-                "lastname": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updatedAt": {
                     "type": "string"
                 }
             }

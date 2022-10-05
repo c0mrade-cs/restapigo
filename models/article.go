@@ -2,11 +2,6 @@ package models
 
 import "time"
 
-type Person struct {
-	Firstname string
-	Lastname  string
-}
-
 type Content struct {
 	Title string
 	Body  string
@@ -15,23 +10,16 @@ type Content struct {
 type Article struct {
 	ID string
 	Content
-	Author    Person
+	AuthorID  string
 	CreatedAt *time.Time
 	UpdatedAt *time.Time
 }
 type Articlecreate struct {
 	Content
-	Author Person
+	AuthorID string
 }
 type Articleupdate struct {
 	ID string
 	Content
-	Author Person
-}
-type JSONResponse struct {
-	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
-}
-type JSONErrorResponse struct {
-	Error string `json:"error"`
+	AuthorID string
 }

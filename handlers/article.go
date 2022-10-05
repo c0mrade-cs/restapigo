@@ -77,7 +77,7 @@ func ReadArticle(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id    path     string  true  "article id"
-// @Success      200  {object}   models.JSONResponse{data=models.Article}
+// @Success      200  {object}   models.JSONResponse{data=models.PackedArticleModel}
 // @Failure      400  {object}  models.JSONErrorResponse
 // @Router       /article/{id} [get]
 func ReadbyIdArticle(c *gin.Context) {

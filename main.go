@@ -27,6 +27,13 @@ func main() {
 	r.GET("/article/:id", handlers.ReadbyIdArticle)
 	r.PUT("/article", handlers.UpdateArticle)
 	r.DELETE("/article/:id", handlers.DeleteArticle)
+
+	r.POST("/author", handlers.CreateAuthor)
+	r.GET("/author", handlers.ReadAuthor)
+	r.GET("/author/:id", handlers.ReadbyIdAuthor)
+	r.PUT("/author", handlers.UpdateAuthor)
+	r.DELETE("/author/:id", handlers.DeleteAuthor)
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":3000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
