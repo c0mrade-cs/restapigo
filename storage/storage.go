@@ -1,86 +1,18 @@
 package storage
 
-import (
-	"errors"
-	"time"
+import "github.com/c0mrade-cs/article/models"
 
-	"github.com/c0mrade-cs/article/models"
-)
+// StorageI ...
+type StorageI interface {
+	CreateArticle(id string, entity models.ArticleCreate) error
+	ReadbyIDArticle(id string) (models.PackedArticleModel, error)
+	ReadArticle(offset, limit int, search string) (resp []models.Article, err error)
+	UpdateArticle(entity models.ArticleUpdate) error
+	DeleteArticle(id string) error
 
-// InMemoryArticleData ...
-var InMemoryArticleData []models.Article
-
-// CreateArticle ...
-func CreateArticle(id string, entity models.ArticleCreate) error {
-	var article models.Article
-	article.ID = id
-	article.Content = entity.Content
-	article.AuthorID = entity.AuthorID
-
-	t := time.Now()
-	article.CreatedAt = &t
-	InMemoryArticleData = append(InMemoryArticleData, article)
-	return nil
-}
-
-// ReadbyIDArticle ...
-func ReadbyIDArticle(id string) (models.PackedArticleModel, error) {
-	var result models.PackedArticleModel
-	for _, v := range InMemoryArticleData {
-		if v.ID == id {
-			author, err := ReadbyIDAuthor(v.AuthorID)
-			if err != nil {
-				return result, err
-			}
-
-			result.ID = v.ID
-			result.Content = v.Content
-			result.Author = author
-			result.CreatedAt = *v.CreatedAt
-			result.UpdatedAt = v.UpdatedAt
-			return result, nil
-		}
-	}
-	return models.PackedArticleModel{}, errors.New("article not found")
-}
-
-// ReadArticle ...
-func ReadArticle() (resp []models.Article, err error) {
-	resp = InMemoryArticleData
-	return resp, err
-}
-
-// UpdateArticle ...
-func UpdateArticle(entity models.ArticleUpdate) error {
-	var article models.Article
-	for i, v := range InMemoryArticleData {
-		if v.ID == entity.ID {
-			t := time.Now()
-			article.UpdatedAt = &t
-			article.CreatedAt = v.CreatedAt
-
-			article.Content = entity.Content
-			article.AuthorID = entity.AuthorID
-			InMemoryArticleData[i] = article
-
-		}
-	}
-
-	return nil
-}
-
-// DeleteArticlei ...
-func DeleteArticlei(id string) (models.Article, error) {
-	for i, v := range InMemoryArticleData {
-		if v.ID == id {
-			InMemoryArticleData = remove(InMemoryArticleData, i)
-
-			return v, nil
-		}
-	}
-	return models.Article{}, errors.New("article not found")
-}
-
-func remove(slice []models.Article, s int) []models.Article {
-	return append(slice[:s], slice[s+1:]...)
+	CreateAuthor(id string, entity models.AuthorCreate) error
+	ReadbyIDAuthor(id string) (models.Author, error)
+	ReadAuthor(offset, limit int, search string) (resp []models.Author, err error)
+	UpdateAuthor(entity models.AuthorUpdate) error
+	DeleteAuthor(id string) error
 }
